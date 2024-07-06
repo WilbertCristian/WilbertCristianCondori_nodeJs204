@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize";
 import 'dotenv/config';
-import { ssl } from "pg/lib/defaults";
 
 export const sequelize = new Sequelize(
     process.env.DB_DATABASE, //db name
@@ -16,7 +15,5 @@ export const sequelize = new Sequelize(
                 rejectUnauthorized: false
             }
         }
-        
-
     }
 );
