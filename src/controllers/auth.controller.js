@@ -10,14 +10,14 @@ async function login(req, res) {
     try {
         const { username, password } = req.body;
         const user = await User.findOne({
-            where: {username, status: Status.ACTIVE},
+            where: {username, status: Status.ACTIVE}
         });
 
         if(!user) 
             return res.status(404).json({message: 'Usuario no encontrado'});
 
         // const comparado = await comparar(password, user.password);
-        if(!(await comparar(password, user.password)))
+        if(!await comparar(password, user.password))
             return res.status(403).json({message: 'Usuario no autorizado'});
 
         const token = jwt.sign({userId: user.id}, process.env.JWT_SECRET, {

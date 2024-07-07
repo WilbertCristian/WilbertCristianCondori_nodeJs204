@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import tasksController from '../controllers/tasks.controller.js';
-// import { authenticateToken } from '../middlewares/authenticate.middlware.js';
+import { authenticateToken } from '../middlewares/authenticate.middlware.js';
 
 const router = Router();
 
@@ -21,7 +21,7 @@ router
 .post(tasksController.createTasks);
 
 router
-.route('/')
+.route('/:id')
 .get(tasksController.getTask)
 .put(tasksController.updateTask)
 .delete(tasksController.deleteTask)

@@ -1,6 +1,6 @@
 import { Task } from "../models/task.js";
 import logger from "../logs/logger.js";
-import { where } from "sequelize";
+// import { where } from "sequelize";
 
 async function getTasks(req, res){
     // res.send('Lista de tareas');
@@ -72,7 +72,7 @@ async function updateTask(req, res) {
             name,
             where: {
                 id,
-                userId,
+                userId
             }
         });
         if(task[0]===0)
@@ -89,7 +89,7 @@ async function updateTask(req, res) {
 async function taskDone(req, res) {
     const {userId} =req.user;
     const {id} = req.params;
-    const {name} = req.body;
+    const {done} = req.body;
 
     try {
         const task = await Task.update({done}, {where: {id, userId}});
@@ -106,8 +106,9 @@ async function taskDone(req, res) {
 
 const deleteTask = async (req, res) => {
     const {id} = req.params;
+    const {userId} = req.user;
     try {
-        await Task.destroy({where: {id}});
+        await Task.destroy({where: {id, userId}});
         return res.sendStatus(204);
     } catch (error) {
         logger.error(error.message);

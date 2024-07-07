@@ -54,7 +54,7 @@ User.beforeCreate(async (user) => {
         user.password = await encript(user.password);
     } catch (error) {
         logger.error(error.message);
-        throw new Error(error.message);
+        throw new Error('Error al encriptar la contraseña');
     }
 });
 User.beforeUpdate(async (user) => {
@@ -62,6 +62,6 @@ User.beforeUpdate(async (user) => {
         user.password = await encript(user.password);
     } catch (error) {
         logger.error(error.message);
-        throw new Error(error.message);
+        throw new Error('Error al encriptar la contraseña');
     }
 });

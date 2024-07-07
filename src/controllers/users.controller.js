@@ -123,13 +123,13 @@ async function getTasks(req, res){
     const {id} = req.params;
     try {
         const user = await User.findOne({
-            attributes: ['usurname'],
+            attributes: ['username'],
             where: {
                 id
             },
             include: [{
                 model: Task,
-                attribute: ['name', 'done']
+                attributes: ['name', 'done']
             }]
         });
         res.json(user);
